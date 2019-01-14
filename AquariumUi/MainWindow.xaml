@@ -1,0 +1,22 @@
+﻿<Window x:Class="AquariumUi.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AquariumUi"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="464*"/>
+            <ColumnDefinition Width="329*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Ajouter Poisson" HorizontalAlignment="Left" Margin="28,49,0,0" VerticalAlignment="Top" Width="87" Click="ClicButtonAddFish"/>
+        <Button Content="Ajouter Requin" HorizontalAlignment="Left" Margin="28,109,0,0" VerticalAlignment="Top" Width="87" Click="ClicButtonAddShark"/>
+        <Button Content="Quitter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="87" Margin="28,250,0,0" Click="ClicButtonExit"/>
+        <Label Content="Nombre de poissons : 0" HorizontalAlignment="Left" Margin="28,155,0,0" VerticalAlignment="Top"/>
+        <Canvas Name="aquariumCanvas" HorizontalAlignment="Left" Height="374" Margin="169,23,0,0" VerticalAlignment="Top" Width="601" Grid.ColumnSpan="2" Background="blue"/>
+        <Button Content="Refresh" HorizontalAlignment="Left" Margin="28,73,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AquariumUi", "AquariumUi\AquariumUi.csproj", "{87E49229-657E-44C3-A8F7-1341702DE852}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\DataModel.csproj", "{04858C5E-F3BB-4F9A-ADFB-EB116146FEC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UILibrary", "UILibrary\UILibrary.csproj", "{BB856AD8-FB7B-4D89-87A4-69920980BA52}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87E49229-657E-44C3-A8F7-1341702DE852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87E49229-657E-44C3-A8F7-1341702DE852}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87E49229-657E-44C3-A8F7-1341702DE852}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87E49229-657E-44C3-A8F7-1341702DE852}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04858C5E-F3BB-4F9A-ADFB-EB116146FEC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04858C5E-F3BB-4F9A-ADFB-EB116146FEC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04858C5E-F3BB-4F9A-ADFB-EB116146FEC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04858C5E-F3BB-4F9A-ADFB-EB116146FEC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB856AD8-FB7B-4D89-87A4-69920980BA52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB856AD8-FB7B-4D89-87A4-69920980BA52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB856AD8-FB7B-4D89-87A4-69920980BA52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB856AD8-FB7B-4D89-87A4-69920980BA52}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {991B8709-B8E2-4DB9-87E3-68F8A1FC5748}
+	EndGlobalSection
+EndGlobal
