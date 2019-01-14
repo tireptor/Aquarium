@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace AquariumUi
 {
@@ -26,13 +27,22 @@ namespace AquariumUi
         public MainWindow()
         {
             InitializeComponent();
-            drawFishs();
+            DispatcherTimer MonTimer = new DispatcherTimer();
+            MonTimer .Interval = new TimeSpan(0, 0, 0, 0, 10); // 100 ms.
+            MonTimer .Tick += delegate(object s, EventArgs args)
+            {
+                refreshCanvas();
+                drawFishs();
+            };
+            MonTimer.Start();
+
 
         }
         private void drawFishs()
         {
             foreach (DataModel.Fish fish in myAquarium.Fishs)
             {
+                fish.Deplacement();
                 Ellipse myEllipse = new Ellipse();
                 myEllipse.Stroke = System.Windows.Media.Brushes.Black;
                 myEllipse.Fill = System.Windows.Media.Brushes.Red;
@@ -49,16 +59,11 @@ namespace AquariumUi
         {
             aquariumCanvas.Children.Clear();
         }
-        private void moveFishs()
-        {
-
-        }
         private void ClicButtonAddFish(object sender, RoutedEventArgs e)
         {
             int randomX = RandPosition.Next(myAquarium.Width); //Génère un entier compris entre 0 et la largeur de l'aquarium
             int randomY = RandPosition.Next(myAquarium.Height); //Génère un entier compris entre 0 et la hauteur de l'aquarium
             myAquarium.addFish(randomX,randomY);
-            drawFishs();
         }
 
         private void ClicButtonAddShark(object sender, RoutedEventArgs e)
