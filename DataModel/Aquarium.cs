@@ -23,9 +23,22 @@ namespace DataModel
 
         public List<Fish> Fishs { get => fishs; private set => fishs = value; }
 
-        public Fish addFish (int randomX,int randomY)
+
+        public GoldFish AddGoldFish(int randomX, int randomY)
         {
-            Fish f = new Fish(randomX,randomY,this);
+            GoldFish f = new GoldFish(randomX, randomY, this);
+            fishs.Add(f);
+            return f;
+        }
+        public MoonFish AddMoonFish(int randomX, int randomY)
+        {
+            MoonFish f = new MoonFish(randomX, randomY, this);
+            fishs.Add(f);
+            return f;
+        }
+        public CatFish AddCatFish(int randomX, int randomY)
+        {
+            CatFish f = new CatFish(randomX, randomY, this);
             fishs.Add(f);
             return f;
         }

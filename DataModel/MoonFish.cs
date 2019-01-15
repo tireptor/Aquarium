@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-    sealed class  MoonFish
+    public sealed class MoonFish : Fish
     {
+        public MoonFish(int positionX, int positionY, Aquarium myAquarium) : base(positionX, positionY, myAquarium)
+        {
+            this.PositionX = positionX;
+            this.PositionY = positionY;
+            this.MyAquarium = myAquarium;
+            this.SpeedX = 2;
+            this.SpeedY = 2;
+        }
     }
 }
