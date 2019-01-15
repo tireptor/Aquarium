@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquariumUi"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Keyboard.KeyDown="KeyDownEventHandler">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="464*"/>
@@ -14,8 +16,11 @@
         <Button Content="Ajouter Requin" HorizontalAlignment="Left" Margin="28,261,0,0" VerticalAlignment="Top" Width="87" Click="ClicButtonAddShark"/>
         <Button Content="Quitter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="87" Margin="28,308,0,0" Click="ClicButtonExit"/>
         <Label Name="labNameFish" Content="Nombre de poissons : 0" HorizontalAlignment="Left" Margin="10,277,0,0" VerticalAlignment="Top"/>
-        <Canvas Name="aquariumCanvas" HorizontalAlignment="Left" Height="374" Margin="169,23,0,0" VerticalAlignment="Top" Width="601" Grid.ColumnSpan="2" Background="blue"/>
-        <Button Content="Refresh" HorizontalAlignment="Left" Margin="28,237,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click"/>
+        <Canvas Name="aquariumCanvas" HorizontalAlignment="Left" Height="374" Margin="169,23,0,0" VerticalAlignment="Top" Width="601" Grid.ColumnSpan="2">
+            <Canvas.Background>
+                <ImageBrush ImageSource="C:\Users\Vincent\Documents\fond.jpg" />
+            </Canvas.Background>
+        </Canvas>
         <Button Content="Ajouter poisson rouge " HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddGoldFish"/>
         <Button Content="Ajouter poisson lune" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddMoonFish"/>
         <Button Content="Ajouter poisson chat" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddCatFish"/>

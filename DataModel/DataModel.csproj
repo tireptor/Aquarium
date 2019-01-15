@@ -41,15 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algae.cs" />
     <Compile Include="Aquarium.cs" />
     <Compile Include="CatFish.cs" />
     <Compile Include="Class1.cs" />
-    <Compile Include="Decorations.cs" />
+    <Compile Include="Decoration.cs" />
     <Compile Include="Fish.cs" />
     <Compile Include="GoldFish.cs" />
     <Compile Include="MoonFish.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shark.cs" />
+    <Compile Include="Shell.cs" />
+    <Compile Include="Wreck.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

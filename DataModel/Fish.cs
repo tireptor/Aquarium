@@ -12,13 +12,13 @@ namespace DataModel
         private int positionY;
         private int speedX;
         private int speedY;
-        private int randomX;
-        private int randomY;
-        private int randomNumberTurnOfDirectionX = 0;
-        private int randomNumberTurnOfDirectionY = 0;
+        protected int randomX;
+        protected int randomY;
+        protected int randomNumberTurnOfDirectionX = 0;
+        protected int randomNumberTurnOfDirectionY = 0;
         private Aquarium myAquarium;
 
-        Random RandDeplacement = new Random();
+        protected Random RandDeplacement = new Random();
 
         public Fish(int positionX, int positionY, Aquarium myAquarium )
         {
@@ -33,25 +33,24 @@ namespace DataModel
         public int SpeedY { get => speedY; protected set => speedY = value; }
         public Aquarium MyAquarium { get => myAquarium; protected set => myAquarium = value; }
 
-        public void Deplacement()
+        public virtual void Deplacement()
         {
             int positionXTested;
             int positionYTested;
             int signe = 1;
             if (randomNumberTurnOfDirectionY == 0)
             {
-                randomY = RandDeplacement.Next(2); //Génère un entier compris entre 0 et 1
+                randomY = RandDeplacement.Next(3); //Génère un entier compris entre 0 et 2; 0 => sur place
                 randomNumberTurnOfDirectionY = RandDeplacement.Next(1, 300);
             }
             if (randomNumberTurnOfDirectionX == 0)
             {
-                randomX = RandDeplacement.Next(2); //Génère un entier compris entre 0 et 1
+                randomX = RandDeplacement.Next(3); //Génère un entier compris entre 0 et 2
                 randomNumberTurnOfDirectionX = RandDeplacement.Next(1,300);
             }
             // A chaque tour on décrémente le nombre de fois que le poisson doit prendre cette direction.
             randomNumberTurnOfDirectionX--;
             randomNumberTurnOfDirectionY--;
-
 
             if (randomX == 0)
             { signe = -1; }
@@ -84,8 +83,14 @@ namespace DataModel
                 positionYTested += SpeedY;
                 randomNumberTurnOfDirectionY = 0;
             }
-            positionX = positionXTested;
-            positionY = positionYTested;
+            if (randomX != 2)
+            {
+                positionX = positionXTested;
+            }
+            if (randomY != 2)
+            {
+                positionY = positionYTested;
+            }
         }
     }
 }

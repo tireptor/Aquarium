@@ -32,15 +32,57 @@ namespace AquariumUi
             InitializeComponent();
             DispatcherTimer MonTimer = new DispatcherTimer
             {
-                Interval = new TimeSpan(0, 0, 0, 0, 10) // 10 ms.
+                Interval = new TimeSpan(0, 0, 0, 0, 20) // 10 ms.
             };
             MonTimer .Tick += delegate(object s, EventArgs args)
             {
                 RefreshCanvas();
                 DrawFishs();
+                //InitDecorations();
             };
             MonTimer.Start();
 
+
+        }
+        public void InitDecorations()
+        {
+            ChoiceRandomPositions();
+            myAquarium.AddAlgae(randomX,randomY);
+            ChoiceRandomPositions();
+            myAquarium.AddAlgae(randomX, randomY);
+
+            foreach (DataModel.Decoration decoration in myAquarium.Decorations)
+            {
+                BitmapImage bi3 = new BitmapImage();
+                Image myPicture = new Image();
+                bi3.BeginInit();
+                bi3.UriSource = new Uri(decoration.PicturePath, UriKind.Relative);
+                bi3.EndInit();
+
+                myPicture.Stretch = Stretch.Fill;
+                myPicture.Source = bi3;
+
+                Canvas.SetTop(myPicture, decoration.PositionY);
+                Canvas.SetRight(myPicture, decoration.PositionX);
+                aquariumCanvas.Children.Add(myPicture);
+            }
+
+        }
+        public void KeyDownEventHandler(object sender, KeyEventArgs e)
+        {
+            ChoiceRandomPositions();
+            if (e.Key == Key.R)
+            {
+                myAquarium.AddGoldFish(randomX, randomY);
+            }
+            if (e.Key == Key.L)
+            {
+                myAquarium.AddMoonFish(randomX, randomY);
+            }
+            if (e.Key == Key.C)
+            {
+                myAquarium.AddCatFish(randomX, randomY);
+            }
 
         }
         private void DrawFishs()
@@ -70,6 +112,10 @@ namespace AquariumUi
                 {
                     myEllipse.Fill = System.Windows.Media.Brushes.Beige;
                 }
+                if (fish is DataModel.Shark)
+                {
+                    myEllipse.Fill = System.Windows.Media.Brushes.Black;
+                }
 
                 Canvas.SetTop(myEllipse, fish.PositionY);
                 Canvas.SetRight(myEllipse, fish.PositionX);
@@ -84,7 +130,8 @@ namespace AquariumUi
 
         private void ClicButtonAddShark(object sender, RoutedEventArgs e)
         {
-
+            ChoiceRandomPositions();
+            myAquarium.AddShark(randomX, randomY);
         }
 
         private void ClicButtonExit(object sender, RoutedEventArgs e)
@@ -92,10 +139,6 @@ namespace AquariumUi
             Close();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            RefreshCanvas();
-        }
 
         private void ClicButtonAddGoldFish(object sender, RoutedEventArgs e)
         {
@@ -119,5 +162,6 @@ namespace AquariumUi
             randomX = RandPosition.Next(myAquarium.Width); //Génère un entier compris entre 0 et la largeur de l'aquarium
             randomY = RandPosition.Next(myAquarium.Height); //Génère un entier compris entre 0 et la hauteur de l'aquarium
         }
+
     }
 }

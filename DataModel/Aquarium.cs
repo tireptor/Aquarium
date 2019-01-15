@@ -9,6 +9,7 @@ namespace DataModel
     public class Aquarium
     {
         private List<Fish> fishs = new List<Fish>(); // création de la liste des poissons
+        private List<Decoration> decorations = new List<Decoration>(); // création de la liste des décorations de l'aquarium
         private int width; 
         private int height;
 
@@ -22,25 +23,47 @@ namespace DataModel
         public int Height { get => height; private set => height = value; }
 
         public List<Fish> Fishs { get => fishs; private set => fishs = value; }
+        public List<Decoration> Decorations { get => decorations; private set => decorations = value; }
 
-
-        public GoldFish AddGoldFish(int randomX, int randomY)
+        // Ajout des poissons
+        public void AddGoldFish(int randomX, int randomY)
         {
             GoldFish f = new GoldFish(randomX, randomY, this);
             fishs.Add(f);
-            return f;
         }
-        public MoonFish AddMoonFish(int randomX, int randomY)
+        public void AddMoonFish(int randomX, int randomY)
         {
             MoonFish f = new MoonFish(randomX, randomY, this);
             fishs.Add(f);
-            return f;
         }
-        public CatFish AddCatFish(int randomX, int randomY)
+        public void AddCatFish(int randomX, int randomY)
         {
             CatFish f = new CatFish(randomX, randomY, this);
             fishs.Add(f);
-            return f;
+        }
+
+        // AJout du requin
+        public void AddShark(int randomX, int randomY)
+        {
+            Shark s = new Shark(randomX, randomY, this);
+            fishs.Add(s);
+        }
+
+        // Ajout des decorations
+        public void AddAlgae(int randomX, int randomY)
+        {
+            Algae a = new Algae(randomX, randomY, this);
+            decorations.Add(a);
+        }
+        public void AddShell(int randomX, int randomY)
+        {
+            Shell s = new Shell(randomX, randomY, this);
+            decorations.Add(s);
+        }
+        public void AddWreck(int randomX, int randomY)
+        {
+            Wreck w = new Wreck(randomX, randomY, this);
+            decorations.Add(w);
         }
 
     }
