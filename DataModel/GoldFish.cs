@@ -10,9 +10,6 @@ namespace DataModel
     {
         public GoldFish(int positionX, int positionY, Aquarium myAquarium) : base(positionX, positionY, myAquarium)
         {
-            this.PositionX = positionX;
-            this.PositionY = positionY;
-            this.MyAquarium = myAquarium;
             this.SpeedX = 1;
             this.SpeedY = 1;
         }

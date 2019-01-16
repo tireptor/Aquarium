@@ -21,19 +21,23 @@ namespace AquariumUi
     /// </summary>
     public partial class MainWindow : Window
     {
-        DataModel.Aquarium myAquarium = new DataModel.Aquarium(580,350);
+        DataModel.Aquarium myAquarium = new DataModel.Aquarium(580, 350);
         Random RandPosition = new Random();
-        int nbFish = 0;
+        int nbGoldFish = 0;
+        int nbMoonFish = 0;
+        int nbCatFish = 0;
         int randomX;
         int randomY;
+        bool isPause = false;
 
+        DispatcherTimer MonTimer = new DispatcherTimer
+        {
+            Interval = new TimeSpan(0, 0, 0, 0, 20) // 10 ms.
+        };
         public MainWindow()
         {
             InitializeComponent();
-            DispatcherTimer MonTimer = new DispatcherTimer
-            {
-                Interval = new TimeSpan(0, 0, 0, 0, 20) // 10 ms.
-            };
+
             MonTimer .Tick += delegate(object s, EventArgs args)
             {
                 RefreshCanvas();
@@ -68,6 +72,49 @@ namespace AquariumUi
             }
 
         }
+        private void EventClick(object sender,MouseEventArgs e)
+        {
+            Point initial;
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                initial = Mouse.GetPosition(aquariumCanvas);
+                // On ajoute le poisson le plus proche du clic dans la liste des poissons mangés, il sera supprimé après
+                myAquarium.FishsEating.Add(FishSameClosest(initial));
+            }
+        }
+
+        private DataModel.Fish FishSameClosest(Point initial)
+        {
+            int smallerGap = 10000000;
+            int gapBetweenSharkAndFish = 0;
+            DataModel.Fish fishWithSmallGap = null;
+            foreach (DataModel.Fish fish in myAquarium.Fishs)
+            {
+                gapBetweenSharkAndFish = (int)Distance(initial.X,initial.Y,fish.PositionX,fish.PositionY);
+                if (gapBetweenSharkAndFish < smallerGap)
+                {
+                    smallerGap = gapBetweenSharkAndFish;
+                    fishWithSmallGap = fish;
+                }
+            }
+            return fishWithSmallGap;
+        }
+        private int CalculDelta(DataModel.Fish fish, int totalPositionThis)
+        {
+            int delta = 0;
+            int total = fish.PositionX * fish.PositionX + fish.PositionY * fish.PositionY;
+
+            if (total >= totalPositionThis)
+            {
+                delta = total - totalPositionThis;
+            }
+            if (total < totalPositionThis)
+            {
+                delta = totalPositionThis - total;
+            }
+            return delta;
+        }
+
         public void KeyDownEventHandler(object sender, KeyEventArgs e)
         {
             ChoiceRandomPositions();
@@ -87,10 +134,11 @@ namespace AquariumUi
         }
         private void DrawFishs()
         {
-            nbFish = 0;
+            nbGoldFish = 0;
+            nbMoonFish = 0;
+            nbCatFish = 0;
             foreach (DataModel.Fish fish in myAquarium.Fishs)
             {
-                nbFish++;
                 fish.Deplacement();
                 Ellipse myEllipse = new Ellipse
                 {
@@ -102,14 +150,17 @@ namespace AquariumUi
                 };
                 if (fish is DataModel.GoldFish)
                 {
+                    nbGoldFish++;
                     myEllipse.Fill = System.Windows.Media.Brushes.Red;
                 }
                 if (fish is DataModel.MoonFish)
                 {
+                    nbMoonFish++;
                     myEllipse.Fill = System.Windows.Media.Brushes.Gray;
                 }
                 if (fish is DataModel.CatFish)
                 {
+                    nbCatFish++;
                     myEllipse.Fill = System.Windows.Media.Brushes.Beige;
                 }
                 if (fish is DataModel.Shark)
@@ -118,10 +169,18 @@ namespace AquariumUi
                 }
 
                 Canvas.SetTop(myEllipse, fish.PositionY);
-                Canvas.SetRight(myEllipse, fish.PositionX);
+                Canvas.SetLeft(myEllipse, fish.PositionX);
                 aquariumCanvas.Children.Add(myEllipse);
             }
-            labNameFish.Content = "Nombre de poisson : " + nbFish;
+            foreach (DataModel.Fish fish in myAquarium.FishsEating)
+            {
+                myAquarium.Fishs.Remove(fish);
+            }
+            myAquarium.FishsEating.Clear();
+
+            labGoldFish.Content = "Poissons rouge : " + nbGoldFish;
+            labMoonFish.Content = "Poissons lune : " + nbMoonFish;
+            labCatFish.Content = "Poissons chat : " + nbCatFish;
         }
         private void RefreshCanvas()
         {
@@ -163,5 +222,40 @@ namespace AquariumUi
             randomY = RandPosition.Next(myAquarium.Height); //Génère un entier compris entre 0 et la hauteur de l'aquarium
         }
 
+        private void ButtonPauseClick(object sender, RoutedEventArgs e)
+        {
+            if (!isPause)
+            {
+                MonTimer.Stop();
+                btnPause.Content = "Reprendre";
+                isPause = true;
+            }
+            else
+            {
+                MonTimer.Start();
+                btnPause.Content = "Pause";
+                isPause = false;
+            }
+
+        }
+
+
+        static public double Distance(double x1, double y1, double x2, double y2)
+        {
+            return Math.Sqrt(Sqr(y2 - y1) + Sqr(x2 - x1));
+        }
+
+
+        static public double Sqr(double a)
+        {
+            return a * a;
+        }
+
+        static double LongueurHypotenuse(double a, double b)
+        {
+            double sommeDesCarres = a * a + b * b;
+            double resultat = Math.Sqrt(sommeDesCarres);
+            return resultat;
+        }
     }
 }

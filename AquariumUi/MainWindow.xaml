@@ -8,22 +8,25 @@
         Title="MainWindow" Height="450" Width="800"
         Keyboard.KeyDown="KeyDownEventHandler">
 
-    <Grid>
+    <Grid Margin="-2,0,1.6,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="464*"/>
             <ColumnDefinition Width="329*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Ajouter Requin" HorizontalAlignment="Left" Margin="28,261,0,0" VerticalAlignment="Top" Width="87" Click="ClicButtonAddShark"/>
+        <Button Content="Ajouter Requin" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top" Width="136" Click="ClicButtonAddShark" Height="23"/>
         <Button Content="Quitter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="87" Margin="28,308,0,0" Click="ClicButtonExit"/>
-        <Label Name="labNameFish" Content="Nombre de poissons : 0" HorizontalAlignment="Left" Margin="10,277,0,0" VerticalAlignment="Top"/>
-        <Canvas Name="aquariumCanvas" HorizontalAlignment="Left" Height="374" Margin="169,23,0,0" VerticalAlignment="Top" Width="601" Grid.ColumnSpan="2">
+        <Label Name="labGoldFish" Content="Poissons rouge : 0" HorizontalAlignment="Left" Margin="28,166,0,0" VerticalAlignment="Top"/>
+        <Canvas Name="aquariumCanvas" MouseLeftButtonDown="EventClick" HorizontalAlignment="Left" Height="374" Margin="165,25,0,0" VerticalAlignment="Top" Width="601" Grid.ColumnSpan="2">
             <Canvas.Background>
                 <ImageBrush ImageSource="C:\Users\Vincent\Documents\fond.jpg" />
             </Canvas.Background>
         </Canvas>
-        <Button Content="Ajouter poisson rouge " HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddGoldFish"/>
-        <Button Content="Ajouter poisson lune" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddMoonFish"/>
-        <Button Content="Ajouter poisson chat" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddCatFish"/>
+        <Button Content="Ajouter poisson rouge " HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddGoldFish"/>
+        <Button Content="Ajouter poisson lune" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddMoonFish"/>
+        <Button Content="Ajouter poisson chat" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddCatFish"/>
+        <Label x:Name="labMoonFish" Content="Poissons lune : 0" HorizontalAlignment="Left" Margin="28,194,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labCatFish" Content="Poissons chat : 0" HorizontalAlignment="Left" Margin="28,223,0,0" VerticalAlignment="Top"/>
+        <Button Content="Pause" x:Name="btnPause" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top" Width="136" Height="26" Click="ButtonPauseClick"/>
 
     </Grid>
 </Window>

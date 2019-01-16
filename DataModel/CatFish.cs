@@ -10,9 +10,6 @@ namespace DataModel
     {
         public CatFish(int positionX, int positionY, Aquarium myAquarium) : base(positionX, positionY, myAquarium)
         {
-            this.PositionX = positionX;
-            this.PositionY = positionY;
-            this.MyAquarium = myAquarium;
             this.SpeedX = 3;
             this.SpeedY = 3;
         }
