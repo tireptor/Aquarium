@@ -47,8 +47,8 @@ namespace DataModel
             int total = this.PositionX + this.PositionY;
             foreach (Fish fish in MyAquarium.Fishs)
             {
-                // On ne doit pas poursuivre les requins
-                if (fish is Shark)
+                // On ne doit pas poursuivre les requins et les oeufs
+                if ((fish is Shark) || (fish.IsAnEgg))
                 continue;
 
                 gapBetweenSharkAndFish = CalculDelta(fish,total);
