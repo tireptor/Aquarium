@@ -179,7 +179,7 @@ namespace DataModel
                 if (this.PositionY > FishPurchased.PositionY)
                 {
                     this.PositionY = this.PositionY - this.SpeedY;
-                }
+                }//comment
             }
 
         }
