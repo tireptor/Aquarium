@@ -18,7 +18,7 @@
         <Label Name="labGoldFish" Content="Poissons rouge : 0" HorizontalAlignment="Left" Margin="28,166,0,0" VerticalAlignment="Top"/>
         <Canvas Name="aquariumCanvas" MouseLeftButtonDown="EventClick" HorizontalAlignment="Left" Height="374" Margin="165,25,0,0" VerticalAlignment="Top" Width="601" Grid.ColumnSpan="2">
             <Canvas.Background>
-                <ImageBrush ImageSource="C:\Users\Vincent\Documents\fond.jpg" />
+                <ImageBrush ImageSource="fond.jpg" />
             </Canvas.Background>
         </Canvas>
         <Button Content="Ajouter poisson rouge " HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddGoldFish"/>
