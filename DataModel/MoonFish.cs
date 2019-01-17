@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DataModel
 {
     public sealed class MoonFish : Fish
-    {
+    {// comment
         public MoonFish(int positionX, int positionY, Aquarium myAquarium, bool isAnEgg = false) : base(positionX, positionY, myAquarium, isAnEgg)
         {
             this.SpeedX = 2;
