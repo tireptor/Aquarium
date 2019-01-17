@@ -8,8 +8,8 @@ namespace DataModel
 {
     public class Aquarium
     {
-        private List<Fish> fishs = new List<Fish>(); // création de la liste des poissons
-        private List<Fish> fishsEating = new List<Fish>(); // création de la liste des poissons
+        private List<Fish> fishs = new List<Fish>(); // liste des poissons dans l'aquarium
+        private List<Fish> fishsEating = new List<Fish>(); // liste des poissons qui viennent d'être mangés
         private List<Decoration> decorations = new List<Decoration>(); // création de la liste des décorations de l'aquarium
         private int width; 
         private int height;

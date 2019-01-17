@@ -90,6 +90,10 @@ namespace AquariumUi
             DataModel.Fish fishWithSmallGap = null;
             foreach (DataModel.Fish fish in myAquarium.Fishs)
             {
+                if (! (fish is DataModel.Shark))
+                    {
+                    continue;
+                    }
                 gapBetweenSharkAndFish = (int)Distance(initial.X,initial.Y,fish.PositionX,fish.PositionY);
                 if (gapBetweenSharkAndFish < smallerGap)
                 {
@@ -137,7 +141,7 @@ namespace AquariumUi
             nbGoldFish = 0;
             nbMoonFish = 0;
             nbCatFish = 0;
-            foreach (DataModel.Fish fish in myAquarium.Fishs)
+            foreach (DataModel.Fish fish in myAquarium.Fishs.ToList())
             {
                 fish.Deplacement();
                 Ellipse myEllipse = new Ellipse
@@ -251,11 +255,5 @@ namespace AquariumUi
             return a * a;
         }
 
-        static double LongueurHypotenuse(double a, double b)
-        {
-            double sommeDesCarres = a * a + b * b;
-            double resultat = Math.Sqrt(sommeDesCarres);
-            return resultat;
-        }
     }
 }

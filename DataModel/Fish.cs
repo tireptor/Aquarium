@@ -12,6 +12,8 @@ namespace DataModel
         private int positionY;
         private int speedX;
         private int speedY;
+        private bool isAnEgg;
+        private int timeBeforeHatching;
         protected int randomX;
         protected int randomY;
         protected int randomNumberTurnOfDirectionX = 0;
@@ -20,10 +22,11 @@ namespace DataModel
 
         protected Random RandDeplacement = new Random();
 
-        public Fish(int positionX, int positionY, Aquarium myAquarium )
+        public Fish(int positionX, int positionY, Aquarium myAquarium, bool isAnEgg = false)
         {
-            this.PositionX = positionX;
-            this.PositionY = positionY;
+            this.PositionX  = positionX;
+            this.PositionY  = positionY;
+            this.IsAnEgg    = isAnEgg;
             this.MyAquarium = myAquarium;
         }
 
@@ -32,12 +35,62 @@ namespace DataModel
         public int SpeedX { get => speedX; protected set => speedX = value; }
         public int SpeedY { get => speedY; protected set => speedY = value; }
         public Aquarium MyAquarium { get => myAquarium; protected set => myAquarium = value; }
+        public bool IsAnEgg { get => isAnEgg; private set => isAnEgg = value; }
+        public int TimeBeforeHatching { get => timeBeforeHatching; protected set => timeBeforeHatching = value; }
+
+        public void Lay()
+        {
+            if (this is GoldFish)
+            {
+                GoldFish f = new GoldFish(this.PositionX, this.PositionY, MyAquarium, true);
+                MyAquarium.Fishs.Add(f);
+            }
+            if (this is MoonFish)
+            {
+                MoonFish f = new MoonFish(this.PositionX, this.PositionY, MyAquarium, true);
+                MyAquarium.Fishs.Add(f);
+            }
+            if (this is CatFish)
+            {
+                CatFish f = new CatFish(this.PositionX, this.PositionY, MyAquarium, true);
+                MyAquarium.Fishs.Add(f);
+            }
+
+        }
+
+        private void ActionEgg()
+        {
+            if (TimeBeforeHatching <= 0)
+            {
+                this.IsAnEgg = false;
+                return;
+            }
+            TimeBeforeHatching--;
+            if(this.PositionY < MyAquarium.Height)
+            {
+                this.PositionY++;
+            }
+        }
 
         public virtual void Deplacement()
         {
             int positionXTested;
             int positionYTested;
+            int randomLay;
             int signe = 1;
+
+            if (this.IsAnEgg)
+            {
+                ActionEgg();
+                return;
+            }
+
+            // Un poisson a une chance sur 1000 de pondre un oeuf à chaque déplacement, un requin ne pond pas.
+            randomLay = RandDeplacement.Next(500);
+            if ((randomLay == 10) && !(this is Shark))
+            {
+                Lay();
+            }
             if (randomNumberTurnOfDirectionY == 0)
             {
                 randomY = RandDeplacement.Next(3); //Génère un entier compris entre 0 et 2; 0 => sur place
