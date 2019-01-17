@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataModel
 {
-    public abstract class Fish
+    public abstract class Fish : INotifyPropertyChanged
     {
         private int positionX;
         private int positionY;
@@ -14,6 +15,8 @@ namespace DataModel
         private int speedY;
         private bool isAnEgg;
         private int timeBeforeHatching;
+        private int signeX = 1;
+        private int signeY = 1;
         protected int randomX;
         protected int randomY;
         protected int randomNumberTurnOfDirectionX = 0;
@@ -21,6 +24,8 @@ namespace DataModel
         private Aquarium myAquarium;
 
         protected Random RandDeplacement = new Random();
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Fish(int positionX, int positionY, Aquarium myAquarium, bool isAnEgg = false)
         {
@@ -77,7 +82,7 @@ namespace DataModel
             int positionXTested;
             int positionYTested;
             int randomLay;
-            int signe = 1;
+            
 
             if (this.IsAnEgg)
             {
@@ -105,15 +110,16 @@ namespace DataModel
             randomNumberTurnOfDirectionX--;
             randomNumberTurnOfDirectionY--;
 
+            signeX = 1;
             if (randomX == 0)
-            { signe = -1; }
-            positionXTested = positionX + SpeedX * signe;
+            { signeX = -1; }
+            positionXTested = positionX + SpeedX * signeX;
 
-            signe =  1;
 
+            signeY = 1;
             if (randomY == 0)
-            { signe = -1; }
-            positionYTested = positionY + SpeedY * signe;
+            { signeY = -1; }
+            positionYTested = positionY + SpeedY * signeY;
 
             if (positionXTested >= this.MyAquarium.Width)
             {
@@ -144,6 +150,16 @@ namespace DataModel
             {
                 positionY = positionYTested;
             }
+
+        }
+
+        public bool Inclinaison()
+        {
+            if (signeX == -1)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

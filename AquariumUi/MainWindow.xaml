@@ -5,28 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquariumUi"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="450" Width="800" WindowState="Maximized"
         Keyboard.KeyDown="KeyDownEventHandler">
 
-    <Grid Margin="-2,0,1.6,0">
+    <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="464*"/>
-            <ColumnDefinition Width="329*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Ajouter Requin" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top" Width="136" Click="ClicButtonAddShark" Height="23"/>
-        <Button Content="Quitter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="87" Margin="28,308,0,0" Click="ClicButtonExit"/>
-        <Label Name="labGoldFish" Content="Poissons rouge : 0" HorizontalAlignment="Left" Margin="28,166,0,0" VerticalAlignment="Top"/>
-        <Canvas Name="aquariumCanvas" MouseLeftButtonDown="EventClick" HorizontalAlignment="Left" Height="374" Margin="165,25,0,0" VerticalAlignment="Top" Width="601" Grid.ColumnSpan="2">
+        <DockPanel Grid.Column="0" LastChildFill="False" Margin="5" >
+            <Button Content="Quitter" Click="ClicButtonExit" DockPanel.Dock="Bottom"  FontSize="9.333" Padding="5"/>
+            <Button x:Name="btnPause" Content="Pause" Click="ButtonPauseClick" DockPanel.Dock="Bottom"  FontSize="9.333" Padding="5"/>
+            <Button Content="Ajouter poisson rouge"  FontSize="9.333" DockPanel.Dock="Top" Click="ClicButtonAddGoldFish" Padding="5"/>
+            <Button Content="Ajouter poisson chat"  FontSize="9.333" DockPanel.Dock="Top" Click="ClicButtonAddCatFish" Padding="5"/>
+            <Button Content="Ajouter poisson lune"  FontSize="9.333" DockPanel.Dock="Top" Click="ClicButtonAddMoonFish" Padding="5"/>
+            <Button Content="Ajouter requin"  FontSize="9.333" DockPanel.Dock="Top" Click="ClicButtonAddShark" Padding="5"/>
+            <Label x:Name="labGoldFish" Content="Poissons Rouge : "  FontSize="9.333" DockPanel.Dock="Top"  Padding="5"/>
+            <Label x:Name="labCatFish" Content="Poissons Chat : "  FontSize="9.333" DockPanel.Dock="Top"  Padding="5"/>
+            <Label x:Name="labMoonFish" Content="Poissons Lune : "  FontSize="9.333" DockPanel.Dock="Top"  Padding="5"/>
+            <Label x:Name="nbRequin" Content="Requin : "  FontSize="9.333" DockPanel.Dock="Top"  Padding="5"/>
+        </DockPanel>
+        <Canvas Grid.Column="1" Name="aquariumCanvas" MouseLeftButtonDown="EventClick" SizeChanged="CanvasSizeChanged" >
             <Canvas.Background>
                 <ImageBrush ImageSource="fond.jpg" />
             </Canvas.Background>
         </Canvas>
-        <Button Content="Ajouter poisson rouge " HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddGoldFish"/>
-        <Button Content="Ajouter poisson lune" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddMoonFish"/>
-        <Button Content="Ajouter poisson chat" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddCatFish"/>
-        <Label x:Name="labMoonFish" Content="Poissons lune : 0" HorizontalAlignment="Left" Margin="28,194,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="labCatFish" Content="Poissons chat : 0" HorizontalAlignment="Left" Margin="28,223,0,0" VerticalAlignment="Top"/>
-        <Button Content="Pause" x:Name="btnPause" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top" Width="136" Height="26" Click="ButtonPauseClick"/>
-
     </Grid>
 </Window>

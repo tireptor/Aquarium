@@ -20,8 +20,8 @@ namespace DataModel
             Height = height;
         }
 
-        public int Width { get => width; private set => width = value; }
-        public int Height { get => height; private set => height = value; }
+        public int Width { get => width; set => width = value; }
+        public int Height { get => height; set => height = value; }
 
         public List<Fish> Fishs { get => fishs; private set => fishs = value; }
         public List<Decoration> Decorations { get => decorations; private set => decorations = value; }
