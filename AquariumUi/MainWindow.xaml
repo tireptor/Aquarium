@@ -13,12 +13,12 @@
             <ColumnDefinition Width="464*"/>
             <ColumnDefinition Width="329*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Ajouter Requin" HorizontalAlignment="Left" Margin="28,261,0,0" VerticalAlignment="Top" Width="87" Click="ClicButtonAddShark"/>
+        <Button Content="Ajouter Requin" HorizontalAlignment="Left" Margin="11,196,0,0" VerticalAlignment="Top" Width="135" Click="ClicButtonAddShark"/>
         <Button Content="Quitter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="87" Margin="28,308,0,0" Click="ClicButtonExit"/>
         <Label Name="labNameFish" Content="Nombre de poissons : 0" HorizontalAlignment="Left" Margin="10,277,0,0" VerticalAlignment="Top"/>
         <Canvas Name="aquariumCanvas" HorizontalAlignment="Left" Height="374" Margin="169,23,0,0" VerticalAlignment="Top" Width="601" Grid.ColumnSpan="2">
             <Canvas.Background>
-                <ImageBrush ImageSource="C:\Users\Vincent\Documents\fond.jpg" />
+                <ImageBrush ImageSource="C:\Users\Vince\Documents\fond.jpg" />
             </Canvas.Background>
         </Canvas>
         <Button Content="Ajouter poisson rouge " HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddGoldFish"/>
