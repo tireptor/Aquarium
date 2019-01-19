@@ -36,6 +36,7 @@ namespace AquariumUi
         };
         public MainWindow()
         {
+
             InitializeComponent();
 
             MonTimer .Tick += delegate(object s, EventArgs args)
@@ -48,6 +49,7 @@ namespace AquariumUi
 
 
         }
+
         public void InitDecorations()
         {
             ChoiceRandomPositions();
@@ -182,9 +184,12 @@ namespace AquariumUi
             }
             myAquarium.FishsEating.Clear();
 
-            labGoldFish.Content = "Poissons rouge : " + nbGoldFish;
-            labMoonFish.Content = "Poissons lune : " + nbMoonFish;
-            labCatFish.Content = "Poissons chat : " + nbCatFish;
+           labGoldFish.Content = "Poissons rouge : " + nbGoldFish;
+
+           labMoonFish.Content = "Poissons lune : " + nbMoonFish;
+
+           labCatFish.Content = "Poissons chat : " + nbCatFish;
+
         }
         private void RefreshCanvas()
         {
@@ -231,13 +236,17 @@ namespace AquariumUi
             if (!isPause)
             {
                 MonTimer.Stop();
+
                 btnPause.Content = "Reprendre";
+
                 isPause = true;
             }
             else
             {
                 MonTimer.Start();
+
                 btnPause.Content = "Pause";
+
                 isPause = false;
             }
 

@@ -14,16 +14,20 @@
             <ColumnDefinition Width="329*"/>
         </Grid.ColumnDefinitions>
         <Button Content="Ajouter Requin" HorizontalAlignment="Left" Margin="11,196,0,0" VerticalAlignment="Top" Width="135" Click="ClicButtonAddShark"/>
-        <Button Content="Quitter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="87" Margin="28,308,0,0" Click="ClicButtonExit"/>
+        <Button Content="Quitter"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="87" Margin="28,308,0,0" Click="ClicButtonExit"/>
         <Label Name="labNameFish" Content="Nombre de poissons : 0" HorizontalAlignment="Left" Margin="10,277,0,0" VerticalAlignment="Top"/>
         <Canvas Name="aquariumCanvas" HorizontalAlignment="Left" Height="374" Margin="169,23,0,0" VerticalAlignment="Top" Width="601" Grid.ColumnSpan="2">
             <Canvas.Background>
                 <ImageBrush ImageSource="C:\Users\Vince\Documents\fond.jpg" />
             </Canvas.Background>
         </Canvas>
-        <Button Content="Ajouter poisson rouge " HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddGoldFish"/>
-        <Button Content="Ajouter poisson lune" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddMoonFish"/>
-        <Button Content="Ajouter poisson chat" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddCatFish"/>
+        <Button Content="Ajouter poisson rouge " HorizontalAlignment="Left" Margin="9,12,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddGoldFish"/>
+        <Button Content="Ajouter poisson lune" HorizontalAlignment="Left" Margin="9,40,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddMoonFish"/>
+        <Button Content="Ajouter poisson chat" HorizontalAlignment="Left" Margin="9,68,0,0" VerticalAlignment="Top" Width="136" Height="28" Click="ClicButtonAddCatFish"/>
+        <Button Content="Pause" Name="btnPause" HorizontalAlignment="Left" Margin="28,377,0,0" VerticalAlignment="Top" Width="75" Click="ButtonPauseClick"/>
+        <Label x:Name="labGoldFish" Content="Poissons rouges : 0" HorizontalAlignment="Left" Margin="11,101,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labMoonFish" Content="Poissons lunes : 0" HorizontalAlignment="Left" Margin="11,127,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labCatFish" Content="Poissons chats : 0" HorizontalAlignment="Left" Margin="13,153,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
