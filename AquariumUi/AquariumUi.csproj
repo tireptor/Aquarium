@@ -100,5 +100,12 @@
       <Name>DataModel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="catFish.png" />
+    <Resource Include="fond.jpg" />
+    <Resource Include="goldFIsh.png" />
+    <Resource Include="moonFish.png" />
+    <Resource Include="shark.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

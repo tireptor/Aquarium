@@ -8,7 +8,8 @@ namespace DataModel
 {
     public class Aquarium
     {
-        private List<Fish> fishs = new List<Fish>(); // création de la liste des poissons
+        private List<Fish> fishs = new List<Fish>(); // liste des poissons dans l'aquarium
+        private List<Fish> fishsEating = new List<Fish>(); // liste des poissons qui viennent d'être mangés
         private List<Decoration> decorations = new List<Decoration>(); // création de la liste des décorations de l'aquarium
         private int width; 
         private int height;
@@ -24,6 +25,7 @@ namespace DataModel
 
         public List<Fish> Fishs { get => fishs; private set => fishs = value; }
         public List<Decoration> Decorations { get => decorations; private set => decorations = value; }
+        public List<Fish> FishsEating { get => fishsEating; set => fishsEating = value; }
 
         // Ajout des poissons
         public void AddGoldFish(int randomX, int randomY)

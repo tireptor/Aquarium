@@ -19,10 +19,25 @@ namespace DataModel
             this.SpeedX = 2;
             this.SpeedY = 2;
         }
-
-        private void Eat()
+        private bool ImSamePositionWithFish()
         {
-
+            // Si le requin est très proche du poisson qu'il poursuit alors la procédure renvoie vrai.
+            if (((this.PositionX > FishPurchased.PositionX - 2)&&(this.PositionX < FishPurchased.PositionX + 2)) && (this.PositionY > FishPurchased.PositionY - 2)&& (this.PositionY < FishPurchased.PositionY + 2))
+            {
+                return true;
+            }
+            return false;
+        }
+        private void EatFish()
+        {
+            // On ajouter le poisson dans la liste des poissons mangés, tous les poissons de cette liste seront mangés
+            MyAquarium.FishsEating.Add(FishPurchased);
+        }
+        private void InitSharkBehavior()
+        {
+            // Réinitialise le comportement du requin, reprise du mode balade et réinitialisation du poisson à poursuivre
+            Ride();
+            FishPurchased = null;
         }
         private void SearchCloser()
         {
@@ -33,7 +48,7 @@ namespace DataModel
             foreach (Fish fish in MyAquarium.Fishs)
             {
                 // On ne doit pas poursuivre les requins
-                if (fish is Shark)
+                if ((fish is Shark) || (fish.IsAnEgg))
                 continue;
 
                 gapBetweenSharkAndFish = CalculDelta(fish,total);
@@ -60,7 +75,7 @@ namespace DataModel
             return delta;
         }
 
-        private void ride()
+        private void Ride()
         {
             int positionXTested;
             int positionYTested;
@@ -121,76 +136,52 @@ namespace DataModel
 
         public override void Deplacement()
         {
+
             if (FishPurchased == null)
             {
                 SearchCloser();
+                // Si on a trouvé un poisson proche du requin, alors on définit un nombre de tour pendant lequel on va poursuivre le poisson
                 if (FishPurchased != null)
                 NumberTurnToPurchasing = RandDeplacement.Next(1, 300);
             }
+            else
+            {
+                if (ImSamePositionWithFish())
+                {
+                    EatFish();
+                    InitSharkBehavior();
+                    return;
+                }
+            }
             if (NumberTurnToPurchasing == 0)
             {
-                // si le requin ne poursuit aucun poisson alors il est en mode balade
-                ride();
+                // si le requin ne poursuit aucun poisson alors il est en mode balade (déplacement conventionnel des poissons)
+                InitSharkBehavior();
                 return;
             }
-            int positionXTested;
-            int positionYTested;
-            int signe = 1;
 
+            NumberTurnToPurchasing--;
 
-            if (randomNumberTurnOfDirectionY == 0)
+            if (FishPurchased != null)
             {
-                randomY = RandDeplacement.Next(3); //Génère un entier compris entre 0 et 2; 0 => sur place
-                randomNumberTurnOfDirectionY = RandDeplacement.Next(1, 300);
+                if (this.PositionX < FishPurchased.PositionX)
+                {
+                    this.PositionX = this.PositionX + this.SpeedX;
+                }
+                if (this.PositionX > FishPurchased.PositionX)
+                {
+                    this.PositionX = this.PositionX - this.SpeedX;
+                }
+                if (this.PositionY < FishPurchased.PositionY)
+                {
+                    this.PositionY = this.PositionY + this.SpeedY;
+                }
+                if (this.PositionY > FishPurchased.PositionY)
+                {
+                    this.PositionY = this.PositionY - this.SpeedY;
+                }//comment
             }
-            if (randomNumberTurnOfDirectionX == 0)
-            {
-                randomX = RandDeplacement.Next(3); //Génère un entier compris entre 0 et 2
-                randomNumberTurnOfDirectionX = RandDeplacement.Next(1, 300);
-            }
-            // A chaque tour on décrémente le nombre de fois que le poisson doit prendre cette direction.
-            randomNumberTurnOfDirectionX--;
-            randomNumberTurnOfDirectionY--;
 
-            if (randomX == 0)
-            { signe = -1; }
-            positionXTested = PositionX + SpeedX * signe;
-
-            signe = 1;
-
-            if (randomY == 0)
-            { signe = -1; }
-            positionYTested = PositionY + SpeedY * signe;
-
-            if (positionXTested >= this.MyAquarium.Width)
-            {
-                positionXTested -= SpeedX;
-                // Si on fonce dans un bord de l'aquarium on réinitialise la direction du poisson.
-                randomNumberTurnOfDirectionX = 0;
-            }
-            if (positionYTested >= this.MyAquarium.Height)
-            {
-                positionYTested -= SpeedY;
-                randomNumberTurnOfDirectionY = 0;
-            }
-            if (positionXTested <= 0)
-            {
-                positionXTested += SpeedX;
-                randomNumberTurnOfDirectionX = 0;
-            }
-            if (positionYTested <= 0)
-            {
-                positionYTested += SpeedY;
-                randomNumberTurnOfDirectionY = 0;
-            }
-            if (randomX != 2)
-            {
-                PositionX = positionXTested;
-            }
-            if (randomY != 2)
-            {
-                PositionY = positionYTested;
-            }
         }
     }
 }

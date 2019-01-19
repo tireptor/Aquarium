@@ -8,13 +8,11 @@ namespace DataModel
 {
     sealed public class GoldFish : Fish
     {
-        public GoldFish(int positionX, int positionY, Aquarium myAquarium) : base(positionX, positionY, myAquarium)
+        public GoldFish(int positionX, int positionY, Aquarium myAquarium, bool isAnEgg = false) : base(positionX, positionY, myAquarium, isAnEgg)
         {
-            this.PositionX = positionX;
-            this.PositionY = positionY;
-            this.MyAquarium = myAquarium;
             this.SpeedX = 1;
             this.SpeedY = 1;
+            this.TimeBeforeHatching = 500;
         }
     }
 }
