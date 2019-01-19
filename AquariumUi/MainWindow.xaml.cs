@@ -146,9 +146,11 @@ namespace AquariumUi
             {
 
                 fish.Deplacement();
-                Image sprite = new Image();
-                sprite.Height = 20;
-                sprite.Width = 20;
+                Image sprite = new Image
+                {
+                    Height = 20,
+                    Width = 20
+                };
 
                 if (fish.Inclinaison())
                 {
