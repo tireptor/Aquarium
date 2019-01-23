@@ -32,7 +32,7 @@ namespace AquariumUi
 
         DispatcherTimer MonTimer = new DispatcherTimer
         {
-            Interval = new TimeSpan(0, 0, 0, 0, 20) // 10 ms.
+            Interval = new TimeSpan(0, 0, 0, 0, 20) // 20 ms.
         };
         public MainWindow()
         {
@@ -79,7 +79,8 @@ namespace AquariumUi
             {
                 initial = Mouse.GetPosition(aquariumCanvas);
                 // On ajoute le poisson le plus proche du clic dans la liste des poissons mangés, il sera supprimé après
-                myAquarium.FishsEating.Add(FishSameClosest(initial));
+                myAquarium.Fishs.Remove(FishSameClosest(initial));
+                //myAquarium.FishsEating.Add(FishSameClosest(initial));
             }
         }
 
@@ -146,41 +147,55 @@ namespace AquariumUi
             {
 
                 fish.Deplacement();
+                int sizeHeight = 0;
+                int sizeWidth = 0;
+                // si le poisson est un oeuf alors on applique une taille plus petite (taille d'un oeuf)
+                if (fish.IsAnEgg)
+                {
+                    sizeHeight = fish.SizeEgg;
+                    sizeWidth = fish.SizeEgg;
+                }
+                else
+                {
+                    sizeHeight = fish.Size;
+                    sizeWidth = fish.Size;
+                }
                 Image sprite = new Image
                 {
-                    Height = 20,
-                    Width = 20
+                    Height = sizeHeight,
+                    Width = sizeWidth
                 };
-
+                // Si un changement de direction est détecté lors du déplacement d'un poisson alors on retourne l'image du poisson
                 if (fish.Inclinaison())
                 {
                     sprite.RenderTransform = new ScaleTransform() { ScaleX = -1 };
                 }
 
-                //Ellipse myEllipse = new Ellipse
-                //{
-                //    Stroke = System.Windows.Media.Brushes.Black,
-                //    HorizontalAlignment = HorizontalAlignment.Left,
-                //    VerticalAlignment = VerticalAlignment.Center,
-                //    Width = 20,
-                //    Height = 20
-                //};
                 if (fish is DataModel.GoldFish)
                 {
                     nbGoldFish++;
-                    sprite.Source = new BitmapImage(new Uri($@"{Environment.CurrentDirectory}\Resources\goldFish.png"));
+                    if (fish.IsAnEgg)
+                        sprite.Source = new BitmapImage(new Uri($@"{Environment.CurrentDirectory}\Resources\egg.png"));
+                    else
+                        sprite.Source = new BitmapImage(new Uri($@"{Environment.CurrentDirectory}\Resources\goldFish.png"));
                     //myEllipse.Fill = System.Windows.Media.Brushes.Red;
                 }
                 if (fish is DataModel.MoonFish)
                 {
                     nbMoonFish++;
-                    sprite.Source = new BitmapImage(new Uri($@"{Environment.CurrentDirectory}\Resources\moonFish.png"));
+                    if (fish.IsAnEgg)
+                        sprite.Source = new BitmapImage(new Uri($@"{Environment.CurrentDirectory}\Resources\egg.png"));
+                    else
+                        sprite.Source = new BitmapImage(new Uri($@"{Environment.CurrentDirectory}\Resources\moonFish.png"));
                     //myEllipse.Fill = System.Windows.Media.Brushes.Gray;
                 }
                 if (fish is DataModel.CatFish)
                 {
                     nbCatFish++;
-                    sprite.Source = new BitmapImage(new Uri($@"{Environment.CurrentDirectory}\Resources\catFish.png"));
+                    if (fish.IsAnEgg)
+                        sprite.Source = new BitmapImage(new Uri($@"{Environment.CurrentDirectory}\Resources\egg.png"));
+                    else
+                        sprite.Source = new BitmapImage(new Uri($@"{Environment.CurrentDirectory}\Resources\catFish.png"));
                     //myEllipse.Fill = System.Windows.Media.Brushes.Beige;
                 }
                 if (fish is DataModel.Shark)
@@ -193,11 +208,11 @@ namespace AquariumUi
                 Canvas.SetLeft(sprite, fish.PositionX);
                 aquariumCanvas.Children.Add(sprite);
             }
-            foreach (DataModel.Fish fish in myAquarium.FishsEating)
-            {
-                myAquarium.Fishs.Remove(fish);
-            }
-            myAquarium.FishsEating.Clear();
+            //foreach (DataModel.Fish fish in myAquarium.FishsEating)
+            //{
+            //    myAquarium.Fishs.Remove(fish);
+            //}
+            //myAquarium.FishsEating.Clear();
 
             labGoldFish.Content = "Poissons rouge : " + nbGoldFish;
             labMoonFish.Content = "Poissons lune : " + nbMoonFish;
@@ -259,8 +274,6 @@ namespace AquariumUi
             }
 
         }
-
-
         static public double Distance(double x1, double y1, double x2, double y2)
         {
             return Math.Sqrt(Sqr(y2 - y1) + Sqr(x2 - x1));

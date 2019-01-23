@@ -18,6 +18,7 @@ namespace DataModel
         {
             this.SpeedX = 2;
             this.SpeedY = 2;
+            this.Size = 120;
         }
         private bool ImSamePositionWithFish()
         {
@@ -31,7 +32,8 @@ namespace DataModel
         private void EatFish()
         {
             // On ajouter le poisson dans la liste des poissons mangés, tous les poissons de cette liste seront mangés
-            MyAquarium.FishsEating.Add(FishPurchased);
+            //MyAquarium.FishsEating.Add(FishPurchased);
+            MyAquarium.Fishs.Remove(FishPurchased);
         }
         private void InitSharkBehavior()
         {
@@ -41,7 +43,7 @@ namespace DataModel
         }
         private void SearchCloser()
         {
-            int smallerGap = 100;
+            int smallerGap = 200;
             int gapBetweenSharkAndFish = 0;
             Fish fishWithSmallGap = FishPurchased;
             int total = this.PositionX + this.PositionY;
@@ -51,7 +53,8 @@ namespace DataModel
                 if ((fish is Shark) || (fish.IsAnEgg))
                 continue;
 
-                gapBetweenSharkAndFish = CalculDelta(fish,total);
+                //gapBetweenSharkAndFish = CalculDelta(fish,total);
+                gapBetweenSharkAndFish = (int)Distance(this.PositionX,this.PositionY,fish.PositionX,fish.PositionY);
                 if (gapBetweenSharkAndFish < smallerGap)
                 {
                     smallerGap = gapBetweenSharkAndFish;
@@ -79,7 +82,6 @@ namespace DataModel
         {
             int positionXTested;
             int positionYTested;
-            int signe = 1;
 
             if (randomNumberTurnOfDirectionY == 0)
             {
@@ -94,32 +96,33 @@ namespace DataModel
             // A chaque tour on décrémente le nombre de fois que le poisson doit prendre cette direction.
             randomNumberTurnOfDirectionX--;
             randomNumberTurnOfDirectionY--;
-
+            this.SigneX = 1;
+            this.SigneY = 1;
             if (randomX == 0)
-            { signe = -1; }
-            positionXTested = PositionX + SpeedX * signe;
-            signe = 1;
-            if (randomY == 0)
-            { signe = -1; }
-            positionYTested = PositionY + SpeedY * signe;
+            { this.SigneX = -1; }
+            positionXTested = PositionX + SpeedX * this.SigneX;
 
-            if (positionXTested >= this.MyAquarium.Width)
+            if (randomY == 0)
+            { this.SigneY = -1; }
+            positionYTested = PositionY + SpeedY * this.SigneY;
+
+            if (positionXTested >= this.MyAquarium.Width - this.Size)
             {
                 positionXTested -= SpeedX;
                 // Si on fonce dans un bord de l'aquarium on réinitialise la direction du poisson.
                 randomNumberTurnOfDirectionX = 0;
             }
-            if (positionYTested >= this.MyAquarium.Height)
+            if (positionYTested >= this.MyAquarium.Height - this.Size)
             {
                 positionYTested -= SpeedY;
                 randomNumberTurnOfDirectionY = 0;
             }
-            if (positionXTested <= 0)
+            if (positionXTested <= 0 + this.Size)
             {
                 positionXTested += SpeedX;
                 randomNumberTurnOfDirectionX = 0;
             }
-            if (positionYTested <= 0)
+            if (positionYTested <= 0 + this.Size)
             {
                 positionYTested += SpeedY;
                 randomNumberTurnOfDirectionY = 0;
@@ -166,10 +169,12 @@ namespace DataModel
             {
                 if (this.PositionX < FishPurchased.PositionX)
                 {
+                    this.SigneX = 1;
                     this.PositionX = this.PositionX + this.SpeedX;
                 }
                 if (this.PositionX > FishPurchased.PositionX)
                 {
+                    this.SigneX = -1;
                     this.PositionX = this.PositionX - this.SpeedX;
                 }
                 if (this.PositionY < FishPurchased.PositionY)
@@ -182,6 +187,16 @@ namespace DataModel
                 }
             }
 
+        }
+        static public double Distance(double x1, double y1, double x2, double y2)
+        {
+            return Math.Sqrt(Sqr(y2 - y1) + Sqr(x2 - x1));
+        }
+
+
+        static public double Sqr(double a)
+        {
+            return a * a;
         }
     }
 }

@@ -12,7 +12,9 @@ namespace DataModel
         {
             this.SpeedX = 1;
             this.SpeedY = 1;
-            this.TimeBeforeHatching = 500;
+            this.Size = 40;
+            this.SizeEgg = 10;
+            this.TimeBeforeHatching = 600;
         }
     }
 }

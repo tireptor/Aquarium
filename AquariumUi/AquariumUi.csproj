@@ -110,17 +110,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\moonFish.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\shark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\goldFish.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\egg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\moonFish.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

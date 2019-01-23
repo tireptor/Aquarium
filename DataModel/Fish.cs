@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-    public abstract class Fish : INotifyPropertyChanged
+    public abstract class Fish : INotifyPropertyChanged   // TODO BINDING à faire
     {
         private int positionX;
         private int positionY;
         private int speedX;
         private int speedY;
+        private int size;
+        private int sizeEgg;
         private bool isAnEgg;
         private int timeBeforeHatching;
         private int signeX = 1;
@@ -25,7 +27,7 @@ namespace DataModel
 
         protected Random RandDeplacement = new Random();
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged; // TODO BINDING à faire
 
         public Fish(int positionX, int positionY, Aquarium myAquarium, bool isAnEgg = false)
         {
@@ -42,6 +44,10 @@ namespace DataModel
         public Aquarium MyAquarium { get => myAquarium; protected set => myAquarium = value; }
         public bool IsAnEgg { get => isAnEgg; private set => isAnEgg = value; }
         public int TimeBeforeHatching { get => timeBeforeHatching; protected set => timeBeforeHatching = value; }
+        public int Size { get => size; protected set => size = value; }
+        public int SigneX { get => signeX; protected set => signeX = value; }
+        public int SigneY { get => signeY; protected set => signeY = value; }
+        public int SizeEgg { get => sizeEgg; protected set =>  sizeEgg = value; }
 
         public void Lay()
         {
@@ -60,18 +66,20 @@ namespace DataModel
                 CatFish f = new CatFish(this.PositionX, this.PositionY, MyAquarium, true);
                 MyAquarium.Fishs.Add(f);
             }
-
         }
 
         private void ActionEgg()
         {
+            // Si le temps avant éclosion est arrivé à 0 alors le poisson n'est plus un oeuf.
             if (TimeBeforeHatching <= 0)
             {
                 this.IsAnEgg = false;
                 return;
             }
+            // Sinon on décrémente de 1 le temps d'éclosion
             TimeBeforeHatching--;
-            if(this.PositionY < MyAquarium.Height)
+            // Si l'oeuf n'est pas déjà au fond de l'aquarium, on continu à le faire descendre.
+            if(this.PositionY < MyAquarium.Height - this.SizeEgg)
             {
                 this.PositionY++;
             }
@@ -91,7 +99,7 @@ namespace DataModel
             }
 
             // Un poisson a une chance sur 1000 de pondre un oeuf à chaque déplacement, un requin ne pond pas.
-            randomLay = RandDeplacement.Next(500);
+            randomLay = RandDeplacement.Next(10000);
             if ((randomLay == 10) && !(this is Shark))
             {
                 Lay();
@@ -110,34 +118,34 @@ namespace DataModel
             randomNumberTurnOfDirectionX--;
             randomNumberTurnOfDirectionY--;
 
-            signeX = 1;
+            SigneX = 1;
             if (randomX == 0)
-            { signeX = -1; }
-            positionXTested = positionX + SpeedX * signeX;
+            { SigneX = -1; }
+            positionXTested = positionX + SpeedX * SigneX;
 
 
-            signeY = 1;
+            SigneY = 1;
             if (randomY == 0)
-            { signeY = -1; }
-            positionYTested = positionY + SpeedY * signeY;
+            { SigneY = -1; }
+            positionYTested = positionY + SpeedY * SigneY;
 
-            if (positionXTested >= this.MyAquarium.Width)
+            if (positionXTested >= this.MyAquarium.Width - this.Size)
             {
                 positionXTested -= SpeedX;
                 // Si on fonce dans un bord de l'aquarium on réinitialise la direction du poisson.
                 randomNumberTurnOfDirectionX = 0;
             }
-            if (positionYTested >= this.MyAquarium.Height)
+            if (positionYTested >= this.MyAquarium.Height - this.Size)
             {
                 positionYTested -= SpeedY;
                 randomNumberTurnOfDirectionY = 0;
             }
-            if (positionXTested <= 0)
+            if (positionXTested <= 0 + this.Size)
             {
                 positionXTested += SpeedX;
                 randomNumberTurnOfDirectionX = 0;
             }
-            if (positionYTested <= 0)
+            if (positionYTested <= 0 + this.Size)
             {
                 positionYTested += SpeedY;
                 randomNumberTurnOfDirectionY = 0;
@@ -155,7 +163,7 @@ namespace DataModel
 
         public bool Inclinaison()
         {
-            if (signeX == -1)
+            if (SigneX == -1)
             {
                 return true;
             }
